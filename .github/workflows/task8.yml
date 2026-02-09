@@ -1,0 +1,29 @@
+name: Task 8 - Archive Artifacts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-archive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Compile Java file
+        run: javac Java_Code.java
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-class-file
+          path: .
